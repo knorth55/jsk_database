@@ -1,6 +1,6 @@
 # jsk_database
 
-## mongo 
+## mongodb
 
 JSK mongodb database server config
 
@@ -12,6 +12,6 @@ This project is moved from [knorth55/toolbox](https://github.com/knorth55/toolbo
 
 JSK grafana config
 
-## systemd
+## influxdb 
 
-JSK database systemd service
+JSK influxdb database server config 
