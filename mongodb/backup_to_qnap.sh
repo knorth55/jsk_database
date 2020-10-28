@@ -26,6 +26,10 @@ else
     fi
 fi
 
+date
+echo "backup starts."
 exec rsync --inplace -auvhP /media/mongo2/mongodb_store /media/qnap/mongodb_store_dump/
+date
+echo "backup ends."
 # sudo mongodump -v --host musca:27017 --out /media/qnap/mongodb_store_dump
 rm -f $PIDFILE
