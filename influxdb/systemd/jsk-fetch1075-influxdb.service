@@ -6,7 +6,7 @@ Wants=network-online.target influxdb.service
 [Service]
 User=applications
 Group=applications
-ExecStart=/bin/bash -c "source /home/applications/ros/melodic/devel/setup.bash && rossetip && rossetmaster fetch1075 && rosrun jsk_tools roscore_regardless.py --respawn roslaunch influxdb_store fetch_influxdb_logger.launch database:=fetcht1075"
+ExecStart=/bin/bash -c "source /home/applications/ros/melodic/devel/setup.bash && rossetip && rossetmaster fetch1075 && rosrun jsk_tools roscore_regardless.py --respawn roslaunch influxdb_store fetch_influxdb_logger.launch database:=fetch1075"
 
 [Install]
 WantedBy=multi-user.target
