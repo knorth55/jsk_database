@@ -3625,7 +3625,7 @@
       },
       "yaxes": [
         {
-          "format": "radian",
+          "format": "none",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -4754,5 +4754,5 @@
   "timezone": "",
   "title": "PR1040",
   "uid": "SEFNJK7Gk",
-  "version": 36
+  "version": 37
 }
