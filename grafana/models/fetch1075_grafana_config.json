@@ -1444,7 +1444,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Base Translation",
+      "title": "Base Rotation",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2170,7 +2170,6 @@
       }
     }
   ],
-
   "refresh": "1m",
   "schemaVersion": 26,
   "style": "dark",
@@ -2199,5 +2198,5 @@
   "timezone": "",
   "title": "Fetch1075",
   "uid": "Ps2TR6tGz",
-  "version": 2
+  "version": 4
 }
