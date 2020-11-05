@@ -12,6 +12,21 @@ This project is moved from [knorth55/toolbox](https://github.com/knorth55/toolbo
 
 JSK influxdb database server config 
 
-## grafana
+### Systemctl service
+
+#### Installation
+
+```
+sudo cp ./influxdb/systemd/* /etc/systemd/system
+sudo systemctl daemon-reload
+# enable your service
+sudo systemctl enable jsk-pr1040-influxdb.service
+```
+
+## Grafana
 
 JSK grafana server config
+
+### Grafana models for InfluxDB
+
+You can find models JSON file in [./grafana/models](./grafana/models).
