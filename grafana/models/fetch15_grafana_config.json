@@ -67,13 +67,13 @@
           "groupBy": [
             {
               "params": [
-                "1s"
+                "10s"
               ],
               "type": "time"
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -203,7 +203,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -217,7 +217,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "l_wheel_joint"
                 ],
                 "type": "field"
               },
@@ -229,9 +229,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "l_wheel_joint"
+              "value": "position"
             }
           ]
         },
@@ -246,7 +246,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -260,7 +260,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "r_wheel_joint"
                 ],
                 "type": "field"
               },
@@ -272,9 +272,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "r_wheel_joint"
+              "value": "position"
             }
           ]
         }
@@ -375,7 +375,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -418,7 +418,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -547,7 +547,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -561,7 +561,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "head_pan_joint"
                 ],
                 "type": "field"
               },
@@ -573,9 +573,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "head_pan_joint"
+              "value": "position"
             }
           ]
         },
@@ -590,7 +590,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -604,7 +604,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "head_tilt_joint"
                 ],
                 "type": "field"
               },
@@ -616,9 +616,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "head_tilt_joint"
+              "value": "position"
             }
           ]
         }
@@ -719,7 +719,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -733,7 +733,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "shoulder_pan_joint"
                 ],
                 "type": "field"
               },
@@ -745,9 +745,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "shoulder_pan_joint"
+              "value": "position"
             }
           ]
         },
@@ -762,7 +762,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -776,7 +776,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "shoulder_lift_joint"
                 ],
                 "type": "field"
               },
@@ -788,9 +788,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "shoulder_lift_joint"
+              "value": "position"
             }
           ]
         },
@@ -805,7 +805,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -819,7 +819,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "upperarm_roll_joint"
                 ],
                 "type": "field"
               },
@@ -831,9 +831,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "upperarm_roll_joint"
+              "value": "position"
             }
           ]
         },
@@ -848,7 +848,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -862,7 +862,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "elbow_flex_joint"
                 ],
                 "type": "field"
               },
@@ -874,9 +874,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "elbow_flex_joint"
+              "value": "position"
             }
           ]
         },
@@ -891,7 +891,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -905,7 +905,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "forearm_roll_joint"
                 ],
                 "type": "field"
               },
@@ -917,9 +917,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "forearm_roll_joint"
+              "value": "position"
             }
           ]
         },
@@ -934,7 +934,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -948,7 +948,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "wrist_flex_joint"
                 ],
                 "type": "field"
               },
@@ -960,9 +960,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "wrist_flex_joint"
+              "value": "position"
             }
           ]
         },
@@ -977,7 +977,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -991,7 +991,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "wrist_roll_joint"
                 ],
                 "type": "field"
               },
@@ -1003,9 +1003,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "wrist_roll_joint"
+              "value": "position"
             }
           ]
         }
@@ -1106,7 +1106,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1120,7 +1120,7 @@
             [
               {
                 "params": [
-                  "position"
+                  "torso_lift_joint"
                 ],
                 "type": "field"
               },
@@ -1132,9 +1132,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "torso_lift_joint"
+              "value": "position"
             }
           ]
         }
@@ -1235,7 +1235,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1249,7 +1249,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "l_wheel_joint"
                 ],
                 "type": "field"
               },
@@ -1261,9 +1261,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "l_wheel_joint"
+              "value": "effort"
             }
           ]
         },
@@ -1278,7 +1278,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1292,7 +1292,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "r_wheel_joint"
                 ],
                 "type": "field"
               },
@@ -1304,9 +1304,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "r_wheel_joint"
+              "value": "effort"
             }
           ]
         }
@@ -1407,7 +1407,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1536,7 +1536,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1550,7 +1550,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "head_pan_joint"
                 ],
                 "type": "field"
               },
@@ -1562,9 +1562,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "head_pan_joint"
+              "value": "effort"
             }
           ]
         },
@@ -1579,7 +1579,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1593,7 +1593,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "head_tilt_joint"
                 ],
                 "type": "field"
               },
@@ -1605,9 +1605,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "head_tilt_joint"
+              "value": "effort"
             }
           ]
         }
@@ -1708,7 +1708,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1722,7 +1722,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "shoulder_pan_joint"
                 ],
                 "type": "field"
               },
@@ -1734,9 +1734,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "shoulder_pan_joint"
+              "value": "effort"
             }
           ]
         },
@@ -1751,7 +1751,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1765,7 +1765,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "shoulder_lift_joint"
                 ],
                 "type": "field"
               },
@@ -1777,9 +1777,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "shoulder_lift_joint"
+              "value": "effort"
             }
           ]
         },
@@ -1794,7 +1794,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1808,7 +1808,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "upperarm_roll_joint"
                 ],
                 "type": "field"
               },
@@ -1820,9 +1820,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "upperarm_roll_joint"
+              "value": "effort"
             }
           ]
         },
@@ -1837,7 +1837,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1851,7 +1851,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "elbow_flex_joint"
                 ],
                 "type": "field"
               },
@@ -1863,9 +1863,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "elbow_flex_joint"
+              "value": "effort"
             }
           ]
         },
@@ -1880,7 +1880,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1894,7 +1894,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "forearm_roll_joint"
                 ],
                 "type": "field"
               },
@@ -1906,9 +1906,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "forearm_roll_joint"
+              "value": "effort"
             }
           ]
         },
@@ -1923,7 +1923,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1937,7 +1937,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "wrist_flex_joint"
                 ],
                 "type": "field"
               },
@@ -1949,9 +1949,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "wrist_flex_joint"
+              "value": "effort"
             }
           ]
         },
@@ -1966,7 +1966,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -1980,7 +1980,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "wrist_roll_joint"
                 ],
                 "type": "field"
               },
@@ -1992,9 +1992,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "wrist_roll_joint"
+              "value": "effort"
             }
           ]
         }
@@ -2095,7 +2095,7 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
@@ -2109,7 +2109,7 @@
             [
               {
                 "params": [
-                  "effort"
+                  "torso_lift_joint"
                 ],
                 "type": "field"
               },
@@ -2121,9 +2121,9 @@
           ],
           "tags": [
             {
-              "key": "joint_name",
+              "key": "type",
               "operator": "=",
-              "value": "torso_lift_joint"
+              "value": "effort"
             }
           ]
         }
@@ -2198,5 +2198,5 @@
   "timezone": "",
   "title": "Fetch15",
   "uid": "6RnqCqtGk",
-  "version": 9
+  "version": 12
 }
