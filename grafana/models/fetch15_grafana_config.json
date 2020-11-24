@@ -169,7 +169,7 @@
         "y": 0
       },
       "hiddenSeries": false,
-      "id": 4,
+      "id": 21,
       "legend": {
         "avg": false,
         "current": false,
@@ -193,7 +193,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "l_wheel_joint",
+          "alias": "receive bps",
           "groupBy": [
             {
               "params": [
@@ -208,7 +208,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "joint_states",
+          "measurement": "network_states",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -217,7 +217,7 @@
             [
               {
                 "params": [
-                  "l_wheel_joint"
+                  "bps"
                 ],
                 "type": "field"
               },
@@ -231,12 +231,12 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "position"
+              "value": "receive"
             }
           ]
         },
         {
-          "alias": "r_wheel_joint",
+          "alias": "transmit bps",
           "groupBy": [
             {
               "params": [
@@ -251,7 +251,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "joint_states",
+          "measurement": "network_states",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -260,7 +260,7 @@
             [
               {
                 "params": [
-                  "r_wheel_joint"
+                  "bps"
                 ],
                 "type": "field"
               },
@@ -274,7 +274,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "position"
+              "value": "transmit"
             }
           ]
         }
@@ -283,7 +283,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Wheel Joint Position",
+      "title": "Network",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -299,7 +299,7 @@
       },
       "yaxes": [
         {
-          "format": "radian",
+          "format": "decbits",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1201,7 +1201,7 @@
         "y": 12
       },
       "hiddenSeries": false,
-      "id": 14,
+      "id": 4,
       "legend": {
         "avg": false,
         "current": false,
@@ -1263,7 +1263,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -1306,7 +1306,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         }
@@ -1315,7 +1315,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Wheel Joint Effort",
+      "title": "Wheel Joint Position",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1331,7 +1331,7 @@
       },
       "yaxes": [
         {
-          "format": "none",
+          "format": "radian",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -2168,6 +2168,178 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Fetch15 InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 12,
+        "w": 4,
+        "x": 12,
+        "y": 24
+      },
+      "hiddenSeries": false,
+      "id": 14,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.4",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "l_wheel_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "l_wheel_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "r_wheel_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "r_wheel_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Wheel Joint Effort",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": "1m",
@@ -2198,5 +2370,5 @@
   "timezone": "",
   "title": "Fetch15",
   "uid": "6RnqCqtGk",
-  "version": 12
+  "version": 14
 }
