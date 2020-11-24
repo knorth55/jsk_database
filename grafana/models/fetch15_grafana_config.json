@@ -1421,7 +1421,7 @@
             [
               {
                 "params": [
-                  "rotation.z"
+                  "rotation.theta"
                 ],
                 "type": "field"
               },
@@ -1460,7 +1460,7 @@
       },
       "yaxes": [
         {
-          "format": "none",
+          "format": "radian",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -2370,5 +2370,5 @@
   "timezone": "",
   "title": "Fetch15",
   "uid": "6RnqCqtGk",
-  "version": 14
+  "version": 16
 }

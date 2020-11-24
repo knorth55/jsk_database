@@ -3578,7 +3578,7 @@
             [
               {
                 "params": [
-                  "rotation.z"
+                  "rotation.theta"
                 ],
                 "type": "field"
               },
@@ -3617,7 +3617,7 @@
       },
       "yaxes": [
         {
-          "format": "none",
+          "format": "radian",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -4746,5 +4746,5 @@
   "timezone": "",
   "title": "PR1012",
   "uid": "Phstnu5Mz",
-  "version": 23
+  "version": 26
 }
