@@ -1074,7 +1074,7 @@
         "y": 0
       },
       "hiddenSeries": false,
-      "id": 20,
+      "id": 34,
       "legend": {
         "avg": false,
         "current": false,
@@ -1098,7 +1098,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "bl_caster_l_wheel_joint",
+          "alias": "receive bps",
           "groupBy": [
             {
               "params": [
@@ -1113,7 +1113,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "joint_states",
+          "measurement": "network_states",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1122,7 +1122,7 @@
             [
               {
                 "params": [
-                  "bl_caster_l_wheel_joint"
+                  "bps"
                 ],
                 "type": "field"
               },
@@ -1136,12 +1136,12 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "position"
+              "value": "receive"
             }
           ]
         },
         {
-          "alias": "bl_caster_r_wheel_joint",
+          "alias": "transmit bps",
           "groupBy": [
             {
               "params": [
@@ -1156,16 +1156,16 @@
               "type": "fill"
             }
           ],
-          "measurement": "joint_states",
+          "measurement": "network_states",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "A",
+          "refId": "B",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "bl_caster_r_wheel_joint"
+                  "bps"
                 ],
                 "type": "field"
               },
@@ -1179,437 +1179,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "position"
-            }
-          ]
-        },
-        {
-          "alias": "bl_caster_rotation_joint",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "joint_states",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "bl_caster_rotation_joint"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "type",
-              "operator": "=",
-              "value": "position"
-            }
-          ]
-        },
-        {
-          "alias": "br_caster_l_wheel_joint",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "joint_states",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "br_caster_l_wheel_joint"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "type",
-              "operator": "=",
-              "value": "position"
-            }
-          ]
-        },
-        {
-          "alias": "br_caster_r_wheel_joint",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "joint_states",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "br_caster_r_wheel_joint"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "type",
-              "operator": "=",
-              "value": "position"
-            }
-          ]
-        },
-        {
-          "alias": "br_caster_rotation_joint",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "joint_states",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "br_caster_rotation_joint"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "type",
-              "operator": "=",
-              "value": "position"
-            }
-          ]
-        },
-        {
-          "alias": "fl_caster_l_wheel_joint",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "joint_states",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "fl_caster_l_wheel_joint"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "type",
-              "operator": "=",
-              "value": "position"
-            }
-          ]
-        },
-        {
-          "alias": "fl_caster_r_wheel_joint",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "joint_states",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "fl_caster_r_wheel_joint"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "type",
-              "operator": "=",
-              "value": "position"
-            }
-          ]
-        },
-        {
-          "alias": "fl_caster_rotation_joint",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "joint_states",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "fl_caster_rotation_joint"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "type",
-              "operator": "=",
-              "value": "position"
-            }
-          ]
-        },
-        {
-          "alias": "fr_caster_l_wheel_joint",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "joint_states",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "fr_caster_l_wheel_joint"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "type",
-              "operator": "=",
-              "value": "position"
-            }
-          ]
-        },
-        {
-          "alias": "fr_caster_r_wheel_joint",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "joint_states",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "fr_caster_r_wheel_joint"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "type",
-              "operator": "=",
-              "value": "position"
-            }
-          ]
-        },
-        {
-          "alias": "fr_caster_rotation_joint",
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "joint_states",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "fr_caster_rotation_joint"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "type",
-              "operator": "=",
-              "value": "position"
+              "value": "transmit"
             }
           ]
         }
@@ -1618,7 +1188,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Wheel Joint Position",
+      "title": "Network",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1634,7 +1204,7 @@
       },
       "yaxes": [
         {
-          "format": "radian",
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1724,7 +1294,7 @@
             [
               {
                 "params": [
-                  "translation.x"
+                  "base_footprint"
                 ],
                 "type": "field"
               },
@@ -1736,9 +1306,21 @@
           ],
           "tags": [
             {
-              "key": "child_frame_id",
+              "key": "frame_id",
               "operator": "=",
-              "value": "base_footprint"
+              "value": "map"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "x"
             }
           ]
         },
@@ -1767,7 +1349,7 @@
             [
               {
                 "params": [
-                  "translation.y"
+                  "base_footprint"
                 ],
                 "type": "field"
               },
@@ -1779,9 +1361,21 @@
           ],
           "tags": [
             {
-              "key": "child_frame_id",
+              "key": "frame_id",
               "operator": "=",
-              "value": "base_footprint"
+              "value": "map"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "y"
             }
           ]
         }
@@ -2928,7 +2522,7 @@
         "y": 12
       },
       "hiddenSeries": false,
-      "id": 22,
+      "id": 20,
       "legend": {
         "avg": false,
         "current": false,
@@ -2990,7 +2584,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -3033,7 +2627,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -3076,7 +2670,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -3119,7 +2713,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -3162,7 +2756,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -3205,7 +2799,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -3248,7 +2842,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -3291,7 +2885,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -3334,7 +2928,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -3377,7 +2971,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -3420,7 +3014,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         },
@@ -3463,7 +3057,7 @@
             {
               "key": "type",
               "operator": "=",
-              "value": "effort"
+              "value": "position"
             }
           ]
         }
@@ -3472,7 +3066,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Wheel Joint Effort",
+      "title": "Wheel Joint Position",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -3488,7 +3082,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "radian",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -3578,7 +3172,7 @@
             [
               {
                 "params": [
-                  "rotation.theta"
+                  "base_footprint"
                 ],
                 "type": "field"
               },
@@ -3590,9 +3184,21 @@
           ],
           "tags": [
             {
-              "key": "child_frame_id",
+              "key": "frame_id",
               "operator": "=",
-              "value": "base_footprint"
+              "value": "map"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "rotation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "theta"
             }
           ]
         }
@@ -4716,6 +4322,1025 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "PR1012 influxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 12,
+        "w": 4,
+        "x": 16,
+        "y": 24
+      },
+      "hiddenSeries": false,
+      "id": 22,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.4",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "bl_caster_l_wheel_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "bl_caster_l_wheel_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "bl_caster_r_wheel_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "bl_caster_r_wheel_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "bl_caster_rotation_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "bl_caster_rotation_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "br_caster_l_wheel_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "br_caster_l_wheel_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "br_caster_r_wheel_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "br_caster_r_wheel_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "br_caster_rotation_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "br_caster_rotation_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "fl_caster_l_wheel_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "fl_caster_l_wheel_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "fl_caster_r_wheel_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "fl_caster_r_wheel_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "fl_caster_rotation_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "fl_caster_rotation_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "fr_caster_l_wheel_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "fr_caster_l_wheel_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "fr_caster_r_wheel_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "fr_caster_r_wheel_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        },
+        {
+          "alias": "fr_caster_rotation_joint",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "joint_states",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "fr_caster_rotation_joint"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "type",
+              "operator": "=",
+              "value": "effort"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Wheel Joint Effort",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "PR1012 influxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 12,
+        "w": 4,
+        "x": 20,
+        "y": 24
+      },
+      "hiddenSeries": false,
+      "id": 35,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.4",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "left translation.x",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "base_transform",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "l_gripper_tool_frame"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "frame_id",
+              "operator": "=",
+              "value": "base_footprint"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "x"
+            }
+          ]
+        },
+        {
+          "alias": "left translation.y",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "base_transform",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "l_gripper_tool_frame"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "frame_id",
+              "operator": "=",
+              "value": "base_footprint"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "y"
+            }
+          ]
+        },
+        {
+          "alias": "left  translation.z",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "base_transform",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "l_gripper_tool_frame"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "frame_id",
+              "operator": "=",
+              "value": "base_footprint"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "z"
+            }
+          ]
+        },
+        {
+          "alias": "right translation.x",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "base_transform",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "r_gripper_tool_frame"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "frame_id",
+              "operator": "=",
+              "value": "base_footprint"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "x"
+            }
+          ]
+        },
+        {
+          "alias": "right translation.y",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "base_transform",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "r_gripper_tool_frame"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "frame_id",
+              "operator": "=",
+              "value": "base_footprint"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "y"
+            }
+          ]
+        },
+        {
+          "alias": "right translation.z",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "base_transform",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "r_gripper_tool_frame"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "frame_id",
+              "operator": "=",
+              "value": "base_footprint"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "z"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "EE Translation",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "lengthm",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "decimals": null,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": "1m",
@@ -4746,5 +5371,5 @@
   "timezone": "",
   "title": "PR1012",
   "uid": "Phstnu5Mz",
-  "version": 26
+  "version": 27
 }
