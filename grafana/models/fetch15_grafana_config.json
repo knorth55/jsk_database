@@ -389,7 +389,7 @@
             [
               {
                 "params": [
-                  "translation.x"
+                  "base_link"
                 ],
                 "type": "field"
               },
@@ -401,9 +401,21 @@
           ],
           "tags": [
             {
-              "key": "child_frame_id",
+              "key": "frame_id",
               "operator": "=",
-              "value": "base_link"
+              "value": "map"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "x"
             }
           ]
         },
@@ -432,7 +444,7 @@
             [
               {
                 "params": [
-                  "translation.y"
+                  "base_link"
                 ],
                 "type": "field"
               },
@@ -444,9 +456,21 @@
           ],
           "tags": [
             {
-              "key": "child_frame_id",
+              "key": "frame_id",
               "operator": "=",
-              "value": "base_link"
+              "value": "map"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "y"
             }
           ]
         }
@@ -1421,7 +1445,7 @@
             [
               {
                 "params": [
-                  "rotation.theta"
+                  "base_link"
                 ],
                 "type": "field"
               },
@@ -1433,9 +1457,21 @@
           ],
           "tags": [
             {
-              "key": "child_frame_id",
+              "key": "frame_id",
               "operator": "=",
-              "value": "base_link"
+              "value": "map"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "rotation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "theta"
             }
           ]
         }
@@ -2340,6 +2376,257 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Fetch15 InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 12,
+        "w": 4,
+        "x": 16,
+        "y": 24
+      },
+      "hiddenSeries": false,
+      "id": 23,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.4",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "translation.x",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "base_transform",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gripper_link"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "frame_id",
+              "operator": "=",
+              "value": "base_link"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "x"
+            }
+          ]
+        },
+        {
+          "alias": "translation.y",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "base_transform",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gripper_link"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "frame_id",
+              "operator": "=",
+              "value": "base_link"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "y"
+            }
+          ]
+        },
+        {
+          "alias": "translation.z",
+          "groupBy": [
+            {
+              "params": [
+                "1s"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "base_transform",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gripper_link"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "frame_id",
+              "operator": "=",
+              "value": "base_link"
+            },
+            {
+              "condition": "AND",
+              "key": "type",
+              "operator": "=",
+              "value": "translation"
+            },
+            {
+              "condition": "AND",
+              "key": "field",
+              "operator": "=",
+              "value": "z"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "EE translation",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "lengthm",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": "1m",
@@ -2370,5 +2657,5 @@
   "timezone": "",
   "title": "Fetch15",
   "uid": "6RnqCqtGk",
-  "version": 16
+  "version": 17
 }
