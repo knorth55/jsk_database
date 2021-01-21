@@ -23,6 +23,7 @@ class PR2GdriveRecorder(object):
         self.sigint_timeout = rospy.get_param('~sigint_timeout', 20)
         self.sigterm_timeout = rospy.get_param('~sigterm_timeout', 10)
         self.process = None
+        self.video_title = None
         self._start_record()
 
     def _timer_cb(self, event):
@@ -37,13 +38,13 @@ class PR2GdriveRecorder(object):
         stamp = datetime.utcfromtimestamp(
             int(self.start_time.to_time()))
         stamp = stamp.strftime('%Y%m%d_%H%M%S')
-        filename = '{}_video.avi'.format(stamp)
+        self.video_title = '{}_video.avi'.format(stamp)
         cmds = [
             'roslaunch',
             'gdrive_recorder',
             'pr2_audio_video_recorder.launch',
             'video_path:={}'.format(self.video_path),
-            'video_title:={}'.format(filename),
+            'video_title:={}'.format(self.video_title),
             '--screen'
         ]
         self.process = subprocess.Popen(
@@ -53,10 +54,12 @@ class PR2GdriveRecorder(object):
             preexec_fn=os.setpgrp()
         )
         rospy.loginfo('start recording in {}/{}'.format(
-            self.video_path, filename))
+            self.video_path, self.video_title))
 
     def _stop_record(self, p):
         self._kill_process(p)
+        rospy.loginfo('stop recording in {}/{}'.format(
+            self.video_path, self.video_title))
 
     def _kill_descendent_processes(self, ppid):
         try:
