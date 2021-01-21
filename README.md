@@ -1,6 +1,10 @@
 # jsk_database
 
-## mongodb
+## gdrive_recorder
+
+## jsk_database_scripts
+
+#### mongodb
 
 JSK mongodb database server config
 
@@ -8,36 +12,47 @@ This project is originally created by Yuki Furuta (@furushchev) and modified by 
 
 This project is moved from [knorth55/toolbox](https://github.com/knorth55/toolbox.git)
 
-### Installation
+#### Installation
 
-Please see [./mongodb/docker](./mongodb/docker) for more information.
+Please see [./jsk_database_scripts/mongodb/docker](./jsk_database_scripts/mongodb/docker) for more information.
 
-### Backup mongodb to QNAP
+#### Backup mongodb to QNAP
 
 ```
-cd ./mongodb
+cd .jsk_database_scripts/mongodb
 sudo bash ./backup_to_qnap.sh
 ```
 
-## influxdb 
+### influxdb 
 
 JSK influxdb database server config 
 
-### Systemctl service
-
-#### Installation
+#### Systemctl service installation
 
 ```
-sudo cp ./influxdb/systemd/* /etc/systemd/system
+sudo cp ./jsk_database_scripts/influxdb/systemd/* /etc/systemd/system
 sudo systemctl daemon-reload
 # enable your service
 sudo systemctl enable jsk-pr1040-influxdb.service
 ```
 
-## grafana
+### gdrive 
+
+JSK gdrive server config 
+
+#### Systemctl service installation
+
+```
+sudo cp ./jsk_database_scripts/gdrive/systemd/* /etc/systemd/system
+sudo systemctl daemon-reload
+# enable your service
+sudo systemctl enable jsk-pr1040-gdrive.service
+```
+
+### grafana
 
 JSK grafana server config
 
-### Grafana models for InfluxDB
+#### Grafana models for InfluxDB
 
-You can find models JSON file in [./grafana/models](./grafana/models).
+You can find models JSON file in [./jsk_database_scripts/grafana/models](./grafana/models).

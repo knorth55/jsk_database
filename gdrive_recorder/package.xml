@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>jsk_database</name>
+  <name>gdrive_recorder</name>
   <version>0.0.0</version>
-  <description>The jsk_database package</description>
+  <description>The gdrive_recorder package</description>
 
   <maintainer email="shingogo.5511@gmail.com">Shingo Kitagawa</maintainer>
   <author email="shingogo.5511@gmail.com">Shingo Kitagawa</author>
@@ -11,9 +11,8 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <exec_depend>audio_video_recorder</exec_depend>
-  <exec_depend>influxdb_store</exec_depend>
+  <exec_depend>gdrive_ros</exec_depend>
 
   <export>
   </export>
-
 </package>
