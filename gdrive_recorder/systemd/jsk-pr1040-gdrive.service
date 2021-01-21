@@ -1,0 +1,12 @@
+[Unit]
+Description=JSK PR1040 gdrive server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=shingo
+Group=shingo
+ExecStart=/bin/bash -c "source /home/shingo/ros/kinetic/devel/setup.bash && rossetip && rossetmaster pr1040 && GOOGLE_DRIVE_SETTINGS_YAML=/var/lib/robot/gdrive/pydrive_settings.yaml rosrun jsk_tools roscore_regardless.py --respawn roslaunch gdrive_ros gdrive_server.launch node_name:=gdrive_record_server"
+
+[Install]
+WantedBy=multi-user.target
