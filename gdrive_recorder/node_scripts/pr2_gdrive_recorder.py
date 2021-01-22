@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from datetime import datetime
+import influxdb
 import os
 import signal
 import subprocess
@@ -32,9 +33,18 @@ class PR2GdriveRecorder(object):
             self._upload_timer_cb)
         self.sigint_timeout = rospy.get_param('~sigint_timeout', 3)
         self.sigterm_timeout = rospy.get_param('~sigterm_timeout', 3)
+        self.store_url = rospy.get_param('~store_url', True)
         self.process = None
         self.video_title = None
         self._start_record()
+
+        if self.store_url:
+            host = rospy.get_param('~host', 'localhost')
+            port = rospy.get_param('~port', 8086)
+            database = rospy.get_param('~database', 'test')
+            self.client = influxdb.InfluxDBClient(
+                host=host, port=port, database=database)
+            self.client.create_database(database)
 
     def _upload_timer_cb(self, event):
         rospy.loginfo('start uploading')
@@ -58,12 +68,30 @@ class PR2GdriveRecorder(object):
             MultipleUpload
         )
         res = gdrive_upload(req)
-        for success, file_path in zip(res.successes, file_paths):
+
+        query = []
+        for success, file_url, file_path in zip(
+                res.successes, res.file_urls, file_paths):
             if success:
                 rospy.loginfo('Upload succeeded: {}'.format(file_path))
+                file_title = file_path.split('/')[-1]
+                stamp = datetime.strptime(file_title[:14], '%Y%m%d%H%M%S')
+                stamp = stamp.isoformat('T') + 'Z'
+                query.append({
+                    "measurement": "gdrive_recorder",
+                    "time": stamp,
+                    "fields": {
+                        "file_title": file_title,
+                        "file_path": file_path,
+                        "file_url": file_url,
+                    }
+
+                })
                 os.remove(file_path)
             else:
                 rospy.loginfo('Upload failed: {}'.format(file_path))
+        if len(query) > 0:
+            self.client.write_points(query, time_precision='ms')
         rospy.loginfo('stop uploading')
 
     def _record_timer_cb(self, event):
@@ -75,9 +103,9 @@ class PR2GdriveRecorder(object):
 
     def _start_record(self):
         self.start_time = rospy.Time.now()
-        stamp = datetime.fromtimestamp(
+        stamp = datetime.utcfromtimestamp(
             int(self.start_time.to_time()))
-        stamp = stamp.strftime('%Y%m%d_%H%M%S')
+        stamp = stamp.strftime('%Y%m%d%H%M%S')
         self.video_title = '{}_pr2_record_video.avi'.format(stamp)
         cmds = [
             'roslaunch',
