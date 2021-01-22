@@ -60,6 +60,7 @@ class PR2GdriveRecorder(object):
         if self.video_title in file_titles:
             file_titles.remove(self.video_title)
         if len(file_titles) == 0:
+            rospy.loginfo('No file found to upload')
             return
         file_paths = ['{}/{}'.format(self.video_path, x) for x in file_titles]
 
