@@ -17,11 +17,10 @@
   <arg name="video_encoding" default="BGR" />
 
   <group ns="kinect_head_pr2_recorder">
-    <node name="rgb_image_transport" pkg="image_transport" type="republish"
+    <node name="$(anon rgb_image_transport)" pkg="image_transport" type="republish" respawn="true"
           args="compressed in:=$(arg compressed_video_topic_name)
                 raw out:=$(arg video_topic_name)" />
   </group>
-
 
   <node name="$(anon audio_video_recorder)" pkg="audio_video_recorder"
         type="audio_video_recorder" output="screen">
