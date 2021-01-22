@@ -160,8 +160,13 @@ class PR2GdriveRecorder(object):
                     "Failed to kill descendent processes: {}".format(e))
         return exit_code
 
-
 if __name__ == '__main__':
     rospy.init_node('pr2_gdrive_recorder')
     recorder = PR2GdriveRecorder()
+
+    def hook():
+        if recorder.process:
+            recorder._kill_process(recorder.process)
+
+    rospy.on_shutdown(hook)
     rospy.spin()
