@@ -40,7 +40,7 @@ class PR2GdriveRecorder(object):
         file_titles = os.listdir(self.video_path)
         file_titles = [
             x for x in file_titles if x.endswith('_pr2_record_video.avi')]
-        if self.video_title in self.file_titles:
+        if self.video_title in file_titles:
             file_titles.remove(self.video_title)
         if len(file_titles) == 0:
             return
