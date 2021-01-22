@@ -71,7 +71,7 @@ class PR2GdriveRecorder(object):
         req.use_timestamp_folder = False
         req.use_timestamp_file_title = False
         gdrive_upload = rospy.ServiceProxy(
-            self.gdrive_server_name + '/upload_multi',
+            '/{}/upload_multi'.format(self.gdrive_server_name),
             MultipleUpload
         )
         res = gdrive_upload(req)
