@@ -6,7 +6,7 @@ Wants=network-online.target
 [Service]
 User=applications
 Group=applications
-ExecStart=/bin/bash -c "source /home/applications/ros/$ROS_DISTRO/devel/setup.bash && rossetip && rossetmaster fetch15 && GOOGLE_DRIVE_SETTINGS_YAML=/var/lib/robot/gdrive/pydrive_settings.yaml rosrun jsk_tools roscore_regardless.py --respawn roslaunch gdrive_ros gdrive_server.launch node_name:=gdrive_record_server"
+ExecStart=/bin/bash -c "source /home/applications/ros/melodic/devel/setup.bash && rossetip && rossetmaster fetch15 && GOOGLE_DRIVE_SETTINGS_YAML=/var/lib/robot/gdrive/pydrive_settings.yaml rosrun jsk_tools roscore_regardless.py --respawn roslaunch gdrive_ros gdrive_server.launch node_name:=gdrive_record_server"
 
 [Install]
 WantedBy=multi-user.target
