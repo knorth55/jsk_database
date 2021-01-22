@@ -21,7 +21,7 @@ class PR2GdriveRecorder(object):
         self.record_duration = rospy.get_param('~record_duration', 60*30)
         self.upload_duration = rospy.get_param('~upload_duration', 60*30)
         self.gdrive_server_name = rospy.get_param(
-            '~gdrive_server_name', 'gdrive_recorder_server')
+            '~gdrive_server_name', 'gdrive_record_server')
         self.upload_parents_path = rospy.get_param(
             '~upload_parents_path', 'pr2_recorder')
         self.record_timer = rospy.Timer(
