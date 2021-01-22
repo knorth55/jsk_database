@@ -9,11 +9,19 @@
   <arg name="audio_sample_rate" default="16000" />
   <arg name="audio_format" default="wave" />
   <arg name="audio_sample_format" default="S16LE" />
-  <arg name="video_topic_name" default="/kinect_head/rgb/image_rect_color" />
+  <arg name="compressed_video_topic_name" default="/kinect_head/rgb/image_rect_color" />
+  <arg name="video_topic_name" default="/kinect_head_pr2_recorder/rgb/image_rect_color" />
   <arg name="video_height" default="480" />
   <arg name="video_width" default="640" />
   <arg name="video_framerate" default="30" />
   <arg name="video_encoding" default="BGR" />
+
+  <group ns="kinect_head_pr2_recorder">
+    <node name="rgb_image_transport" pkg="image_transport" type="republish"
+          args="compressed in:=$(arg compressed_video_topic_name)
+                raw out:=$(arg video_topic_name)" />
+  </group>
+
 
   <node name="$(anon audio_video_recorder)" pkg="audio_video_recorder"
         type="audio_video_recorder" output="screen">
