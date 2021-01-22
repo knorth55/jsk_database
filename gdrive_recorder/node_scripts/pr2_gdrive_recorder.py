@@ -34,10 +34,6 @@ class PR2GdriveRecorder(object):
         self.sigint_timeout = rospy.get_param('~sigint_timeout', 3)
         self.sigterm_timeout = rospy.get_param('~sigterm_timeout', 3)
         self.store_url = rospy.get_param('~store_url', True)
-        self.process = None
-        self.video_title = None
-        self._start_record()
-
         if self.store_url:
             host = rospy.get_param('~host', 'localhost')
             port = rospy.get_param('~port', 8086)
@@ -45,6 +41,16 @@ class PR2GdriveRecorder(object):
             self.client = influxdb.InfluxDBClient(
                 host=host, port=port, database=database)
             self.client.create_database(database)
+
+        self.decompress_process = subprocess.Popen(
+            args=['roslaunch', 'gdrive_recorder', 'pr2_decompress.launch'],
+            close_fds=self.is_posix,
+            env=os.environ.copy(),
+            preexec_fn=os.setpgrp()
+        )
+        self.process = None
+        self.video_title = None
+        self._start_record()
 
     def _upload_timer_cb(self, event):
         rospy.loginfo('start uploading')
@@ -193,6 +199,7 @@ if __name__ == '__main__':
     recorder = PR2GdriveRecorder()
 
     def hook():
+        recorder._kill_process(recorder.decompress_process)
         if recorder.process:
             recorder._kill_process(recorder.process)
 
