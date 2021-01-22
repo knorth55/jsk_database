@@ -1,0 +1,12 @@
+[Unit]
+Description=JSK PR1012 gdrive recorder 
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=applications
+Group=applications
+ExecStart=/bin/bash -c "source /home/applications/ros/melodic/devel/setup.bash && rossetip && rossetmaster pr1012 && rosrun jsk_tools roscore_regardless.py --respawn rosrun gdrive_recorder pr2_gdrive_recorder.py _video_path:=/tmp _database:=pr1012"
+
+[Install]
+WantedBy=multi-user.target
