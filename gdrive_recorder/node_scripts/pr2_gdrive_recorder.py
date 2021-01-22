@@ -37,6 +37,7 @@ class PR2GdriveRecorder(object):
         self._start_record()
 
     def _upload_timer_cb(self, event):
+        rospy.loginfo('start uploading')
         file_titles = os.listdir(self.video_path)
         file_titles = [
             x for x in file_titles if x.endswith('_pr2_record_video.avi')]
@@ -63,6 +64,7 @@ class PR2GdriveRecorder(object):
                 os.remove(file_path)
             else:
                 rospy.loginfo('Upload failed: {}'.format(file_path))
+        rospy.loginfo('stop uploading')
 
     def _record_timer_cb(self, event):
         self.start_time = rospy.Time.now()
