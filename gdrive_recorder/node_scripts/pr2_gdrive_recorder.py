@@ -30,8 +30,8 @@ class PR2GdriveRecorder(object):
         self.upload_timer = rospy.Timer(
             rospy.Duration(self.upload_duration),
             self._upload_timer_cb)
-        self.sigint_timeout = rospy.get_param('~sigint_timeout', 20)
-        self.sigterm_timeout = rospy.get_param('~sigterm_timeout', 10)
+        self.sigint_timeout = rospy.get_param('~sigint_timeout', 3)
+        self.sigterm_timeout = rospy.get_param('~sigterm_timeout', 3)
         self.process = None
         self.video_title = None
         self._start_record()
