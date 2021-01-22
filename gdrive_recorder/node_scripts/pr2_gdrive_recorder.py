@@ -14,8 +14,8 @@ class PR2GdriveRecorder(object):
     def __init__(self):
         self.is_posix = 'posix' in sys.builtin_module_names
         self.video_path = rospy.get_param('~video_path', '/tmp')
-        # default: 10 min
-        self.duration = rospy.get_param('~duration', 60*10)
+        # default: 30 min
+        self.duration = rospy.get_param('~duration', 60*30)
         self.gdrive_server_name = rospy.get_param(
             '~gdrive_server_name', 'gdrive_recorder_server')
         self.timer = rospy.Timer(
@@ -35,7 +35,7 @@ class PR2GdriveRecorder(object):
 
     def _start_record(self):
         self.start_time = rospy.Time.now()
-        stamp = datetime.utcfromtimestamp(
+        stamp = datetime.fromtimestamp(
             int(self.start_time.to_time()))
         stamp = stamp.strftime('%Y%m%d_%H%M%S')
         self.video_title = '{}_video.avi'.format(stamp)
