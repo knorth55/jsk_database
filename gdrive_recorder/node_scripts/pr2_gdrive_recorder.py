@@ -115,11 +115,14 @@ class PR2GdriveRecorder(object):
                                 "file_url": file_url,
                             }
                         })
-                        os.remove(file_path)
                     else:
                         rospy.loginfo('Upload failed: {}'.format(file_path))
                 if len(query) > 0:
                     self.client.write_points(query, time_precision='ms')
+
+            for success, file_path in zip(res.successes,  upload_file_paths):
+                if success:
+                    os.remove(file_path)
         rospy.loginfo('stop uploading')
 
     def _record_timer_cb(self, event):
