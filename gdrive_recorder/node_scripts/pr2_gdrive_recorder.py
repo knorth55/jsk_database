@@ -18,9 +18,9 @@ class PR2GdriveRecorder(object):
     def __init__(self):
         self.is_posix = 'posix' in sys.builtin_module_names
         self.video_path = rospy.get_param('~video_path', '/tmp')
-        # default: 10 min
-        self.record_duration = rospy.get_param('~record_duration', 60*10)
-        self.upload_duration = rospy.get_param('~upload_duration', 60*10)
+        # default: 20 min
+        self.record_duration = rospy.get_param('~record_duration', 60*20)
+        self.upload_duration = rospy.get_param('~upload_duration', 60*20)
         self.gdrive_server_name = rospy.get_param(
             '~gdrive_server_name', 'gdrive_record_server')
         self.upload_parents_path = rospy.get_param(
@@ -64,41 +64,57 @@ class PR2GdriveRecorder(object):
             return
         file_paths = ['{}/{}'.format(self.video_path, x) for x in file_titles]
 
-        req = MultipleUploadRequest()
-        req.file_paths = file_paths
-        req.file_titles = file_titles
-        req.parents_path = self.upload_parents_path
-        req.use_timestamp_folder = False
-        req.use_timestamp_file_title = False
-        gdrive_upload = rospy.ServiceProxy(
-            '/{}/upload_multi'.format(self.gdrive_server_name),
-            MultipleUpload
-        )
-        res = gdrive_upload(req)
-
-        query = []
-        for success, file_url, file_path in zip(
-                res.successes, res.file_urls, file_paths):
-            if success:
-                rospy.loginfo('Upload succeeded: {}'.format(file_path))
-                file_title = file_path.split('/')[-1]
-                stamp = datetime.strptime(file_title[:14], '%Y%m%d%H%M%S')
-                stamp = stamp.isoformat('T') + 'Z'
-                query.append({
-                    "measurement": "gdrive_recorder",
-                    "time": stamp,
-                    "fields": {
-                        "file_title": file_title,
-                        "file_path": file_path,
-                        "file_url": file_url,
-                    }
-
-                })
-                os.remove(file_path)
+        file_days_dict = {}
+        for file_id, file_title in enumerate(file_titles):
+            file_day = file_title[:8]
+            if file_day in file_days_dict:
+                file_days_dict[file_day].append(file_id)
             else:
-                rospy.loginfo('Upload failed: {}'.format(file_path))
-        if len(query) > 0:
-            self.client.write_points(query, time_precision='ms')
+                file_days_dict[file_day] = [file_id]
+
+        for file_day, file_ids in file_days_dict.items():
+            upload_parents_path = self.upload_parents_path + '/' + file_day
+            upload_file_paths = [
+                x for i, x in enumerate(file_paths) if i in file_ids]
+            upload_file_titles = [
+                x for i, x in enumerate(file_titles) if i in file_ids]
+            req = MultipleUploadRequest()
+            req.file_paths = upload_file_paths
+            req.file_titles = upload_file_titles
+            req.parents_path = upload_parents_path
+            req.use_timestamp_folder = False
+            req.use_timestamp_file_title = False
+            gdrive_upload = rospy.ServiceProxy(
+                '/{}/upload_multi'.format(self.gdrive_server_name),
+                MultipleUpload
+            )
+            res = gdrive_upload(req)
+
+            # influxdb
+            if self.store_url:
+                query = []
+                for success, file_url, file_path, file_title, in zip(
+                        res.successes, res.file_urls,
+                        upload_file_paths, upload_file_titles):
+                    if success:
+                        rospy.loginfo('Upload succeeded: {}'.format(file_path))
+                        stamp = datetime.strptime(
+                            file_title[:15], '%Y%m%d_%H%M%S')
+                        stamp = stamp.isoformat('T') + 'Z'
+                        query.append({
+                            "measurement": "gdrive_recorder",
+                            "time": stamp,
+                            "fields": {
+                                "file_title": file_title,
+                                "file_path": file_path,
+                                "file_url": file_url,
+                            }
+                        })
+                        os.remove(file_path)
+                    else:
+                        rospy.loginfo('Upload failed: {}'.format(file_path))
+                if len(query) > 0:
+                    self.client.write_points(query, time_precision='ms')
         rospy.loginfo('stop uploading')
 
     def _record_timer_cb(self, event):
@@ -112,7 +128,7 @@ class PR2GdriveRecorder(object):
         self.start_time = rospy.Time.now()
         stamp = datetime.utcfromtimestamp(
             int(self.start_time.to_time()))
-        stamp = stamp.strftime('%Y%m%d%H%M%S')
+        stamp = stamp.strftime('%Y%m%d_%H%M%S')
         self.video_title = '{}_pr2_record_video.avi'.format(stamp)
         cmds = [
             'roslaunch',
