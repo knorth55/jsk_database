@@ -3,6 +3,7 @@
 from datetime import datetime
 import influxdb
 import os
+import pytz
 import signal
 import subprocess
 import sys
@@ -21,6 +22,7 @@ class PR2GdriveRecorder(object):
         # default: 20 min
         self.record_duration = rospy.get_param('~record_duration', 60*20)
         self.upload_duration = rospy.get_param('~upload_duration', 60*20)
+        timezone = rospy.get_param('~timezone', 'UTC')
         self.gdrive_server_name = rospy.get_param(
             '~gdrive_server_name', 'gdrive_record_server')
         self.upload_parents_path = rospy.get_param(
@@ -50,6 +52,8 @@ class PR2GdriveRecorder(object):
         )
         self.process = None
         self.video_title = None
+        self.tz = pytz.timezone('UTC')
+        self.localtz = pytz.timezone(timezone)
         self._start_record()
 
     def _upload_timer_cb(self, event):
@@ -66,7 +70,7 @@ class PR2GdriveRecorder(object):
 
         file_days_dict = {}
         for file_id, file_title in enumerate(file_titles):
-            file_day = file_title[:8]
+            file_day = file_title.split('_')[0]
             if file_day in file_days_dict:
                 file_days_dict[file_day].append(file_id)
             else:
@@ -98,9 +102,10 @@ class PR2GdriveRecorder(object):
                         upload_file_paths, upload_file_titles):
                     if success:
                         rospy.loginfo('Upload succeeded: {}'.format(file_path))
-                        stamp = datetime.strptime(
-                            file_title[:15], '%Y%m%d_%H%M%S')
-                        stamp = stamp.isoformat('T') + 'Z'
+                        stamp = '_'.join(file_title.split('_')[:2])
+                        stamp = self.localtz.localize(
+                            datetime.strptime(stamp, '%Y%m%d_%H%M%S%Z'))
+                        stamp = stamp.astimezone(self.tz).isoformat('T')
                         query.append({
                             "measurement": "gdrive_recorder",
                             "time": stamp,
@@ -128,7 +133,8 @@ class PR2GdriveRecorder(object):
         self.start_time = rospy.Time.now()
         stamp = datetime.utcfromtimestamp(
             int(self.start_time.to_time()))
-        stamp = stamp.strftime('%Y%m%d_%H%M%S')
+        stamp = self.tz.localize(stamp).astimezone(self.localtz)
+        stamp = stamp.strftime('%Y%m%d_%H%M%S%Z')
         self.video_title = '{}_pr2_record_video.avi'.format(stamp)
         cmds = [
             'roslaunch',
