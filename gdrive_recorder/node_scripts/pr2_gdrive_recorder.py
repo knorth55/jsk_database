@@ -77,11 +77,27 @@ class PR2GdriveRecorder(object):
                 file_days_dict[file_day] = [file_id]
 
         for file_day, file_ids in file_days_dict.items():
+            upload_file_ids = []
+            for file_id in file_ids:
+                file_path = file_paths[file_id]
+                file_size = os.path.getsize(file_path)
+                # check if file size is not empty
+                if file_size == 0:
+                    os.path.remove(file_path)
+                    rospy.logwarn(
+                        'Filesize is 0, so it is aborted to upload: {}',
+                        file_path)
+                else:
+                    upload_file_ids.append(file_id)
+
+            if len(upload_file_ids) == 0:
+                continue
+
             upload_parents_path = self.upload_parents_path + '/' + file_day
             upload_file_paths = [
-                x for i, x in enumerate(file_paths) if i in file_ids]
+                x for i, x in enumerate(file_paths) if i in upload_file_ids]
             upload_file_titles = [
-                x for i, x in enumerate(file_titles) if i in file_ids]
+                x for i, x in enumerate(file_titles) if i in upload_file_ids]
             req = MultipleUploadRequest()
             req.file_paths = upload_file_paths
             req.file_titles = upload_file_titles
