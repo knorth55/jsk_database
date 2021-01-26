@@ -83,7 +83,7 @@ class PR2GdriveRecorder(object):
                 file_size = os.path.getsize(file_path)
                 # check if file size is not empty
                 if file_size == 0:
-                    os.path.remove(file_path)
+                    os.remove(file_path)
                     rospy.logwarn(
                         'Filesize is 0, so it is aborted to upload: {}',
                         file_path)
