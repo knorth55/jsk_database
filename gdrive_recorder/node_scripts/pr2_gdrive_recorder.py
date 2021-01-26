@@ -13,6 +13,8 @@ import rospy
 
 from gdrive_ros.srv import MultipleUpload
 from gdrive_ros.srv import MultipleUploadRequest
+from std_srvs.srv import Trigger
+from std_srvs.srv import TriggerResponse
 
 
 class PR2GdriveRecorder(object):
@@ -27,12 +29,6 @@ class PR2GdriveRecorder(object):
             '~gdrive_server_name', 'gdrive_record_server')
         self.upload_parents_path = rospy.get_param(
             '~upload_parents_path', 'pr2_recorder')
-        self.record_timer = rospy.Timer(
-            rospy.Duration(self.record_duration),
-            self._record_timer_cb)
-        self.upload_timer = rospy.Timer(
-            rospy.Duration(self.upload_duration),
-            self._upload_timer_cb)
         self.sigint_timeout = rospy.get_param('~sigint_timeout', 3)
         self.sigterm_timeout = rospy.get_param('~sigterm_timeout', 3)
         self.store_url = rospy.get_param('~store_url', True)
@@ -43,6 +39,15 @@ class PR2GdriveRecorder(object):
             self.client = influxdb.InfluxDBClient(
                 host=host, port=port, database=database)
             self.client.create_database(database)
+
+        self.record_timer = rospy.Timer(
+            rospy.Duration(self.record_duration),
+            self._record_timer_cb)
+        self.upload_timer = rospy.Timer(
+            rospy.Duration(self.upload_duration),
+            self._upload_timer_cb)
+        self.upload_service = rospy.Service(
+            '~upload', Trigger, self._upload_service_cb)
 
         self.decompress_process = subprocess.Popen(
             args=['roslaunch', 'gdrive_recorder', 'pr2_decompress.launch'],
@@ -57,6 +62,23 @@ class PR2GdriveRecorder(object):
         self._start_record()
 
     def _upload_timer_cb(self, event):
+        self._upload()
+
+    def _upload_service_cb(self, req):
+        result = self._upload()
+        success = True
+        message = ''
+        fail_count = 0
+        for res in result:
+            for suc in res.successes:
+                if not suc:
+                    success = False
+                    fail_count = fail_count + 1
+        if fail_count > 0:
+            message = 'Failed to upload {} files'.format(fail_count)
+        return TriggerResponse(success=success, message=message)
+
+    def _upload(self):
         rospy.loginfo('start uploading')
         file_titles = os.listdir(self.video_path)
         file_titles = [
@@ -76,6 +98,7 @@ class PR2GdriveRecorder(object):
             else:
                 file_days_dict[file_day] = [file_id]
 
+        result = []
         for file_day, file_ids in file_days_dict.items():
             upload_file_ids = []
             for file_id in file_ids:
@@ -107,6 +130,7 @@ class PR2GdriveRecorder(object):
                 MultipleUpload
             )
             res = gdrive_upload(req)
+            result.append(res)
 
             # influxdb
             if self.store_url:
@@ -138,6 +162,7 @@ class PR2GdriveRecorder(object):
                 if success:
                     os.remove(file_path)
         rospy.loginfo('stop uploading')
+        return result
 
     def _record_timer_cb(self, event):
         self.start_time = rospy.Time.now()
