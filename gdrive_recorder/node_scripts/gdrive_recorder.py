@@ -180,7 +180,8 @@ class GdriveRecorder(object):
             int(self.start_time.to_time()))
         stamp = self.tz.localize(stamp).astimezone(self.localtz)
         stamp = stamp.strftime('%Y%m%d_%H%M%S%Z')
-        self.video_title = '{}_{}_record_video.avi'.format(stamp, self.robot_type)
+        self.video_title = '{}_{}_record_video.avi'.format(
+            stamp, self.robot_type)
         cmds = [
             'roslaunch',
             'gdrive_recorder',
