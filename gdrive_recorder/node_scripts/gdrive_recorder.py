@@ -17,7 +17,7 @@ from std_srvs.srv import Trigger
 from std_srvs.srv import TriggerResponse
 
 
-class PR2GdriveRecorder(object):
+class GdriveRecorder(object):
     def __init__(self):
         self.is_posix = 'posix' in sys.builtin_module_names
         self.video_path = rospy.get_param('~video_path', '/tmp')
@@ -25,10 +25,11 @@ class PR2GdriveRecorder(object):
         self.record_duration = rospy.get_param('~record_duration', 60*20)
         self.upload_duration = rospy.get_param('~upload_duration', 60*20)
         timezone = rospy.get_param('~timezone', 'UTC')
+        self.robot_type = rospy.get_param('~robot_type', 'pr2')
         self.gdrive_server_name = rospy.get_param(
             '~gdrive_server_name', 'gdrive_record_server')
         self.upload_parents_path = rospy.get_param(
-            '~upload_parents_path', 'pr2_recorder')
+            '~upload_parents_path', '{}_recorder'.format(self.robot_type))
         self.sigint_timeout = rospy.get_param('~sigint_timeout', 3)
         self.sigterm_timeout = rospy.get_param('~sigterm_timeout', 3)
         self.store_url = rospy.get_param('~store_url', True)
@@ -50,7 +51,8 @@ class PR2GdriveRecorder(object):
             '~upload', Trigger, self._upload_service_cb)
 
         self.decompress_process = subprocess.Popen(
-            args=['roslaunch', 'gdrive_recorder', 'pr2_decompress.launch'],
+            args=['roslaunch', 'gdrive_recorder',
+                  '{}_decompress.launch'.format(self.robot_type)],
             close_fds=self.is_posix,
             env=os.environ.copy(),
             preexec_fn=os.setpgrp()
@@ -82,7 +84,8 @@ class PR2GdriveRecorder(object):
         rospy.loginfo('start uploading')
         file_titles = os.listdir(self.video_path)
         file_titles = [
-            x for x in file_titles if x.endswith('_pr2_record_video.avi')]
+            x for x in file_titles if x.endswith(
+                '_{}_record_video.avi'.format(self.robot_type))]
         if self.video_title in file_titles:
             file_titles.remove(self.video_title)
         if len(file_titles) == 0:
@@ -177,11 +180,11 @@ class PR2GdriveRecorder(object):
             int(self.start_time.to_time()))
         stamp = self.tz.localize(stamp).astimezone(self.localtz)
         stamp = stamp.strftime('%Y%m%d_%H%M%S%Z')
-        self.video_title = '{}_pr2_record_video.avi'.format(stamp)
+        self.video_title = '{}_{}_record_video.avi'.format(stamp, self.robot_type)
         cmds = [
             'roslaunch',
             'gdrive_recorder',
-            'pr2_audio_video_recorder.launch',
+            '{}_audio_video_recorder.launch'.format(self.robot_type),
             'video_path:={}'.format(self.video_path),
             'video_title:={}'.format(self.video_title),
             '--screen'
@@ -260,8 +263,8 @@ class PR2GdriveRecorder(object):
         return exit_code
 
 if __name__ == '__main__':
-    rospy.init_node('pr2_gdrive_recorder')
-    recorder = PR2GdriveRecorder()
+    rospy.init_node('gdrive_recorder')
+    recorder = GdriveRecorder()
 
     def hook():
         recorder._kill_process(recorder.decompress_process)
