@@ -102,7 +102,8 @@ class GdriveRecorder(object):
                 file_days_dict[file_day] = [file_id]
 
         result = []
-        for file_day, file_ids in file_days_dict.items():
+        for file_day in sorted(file_days_dict.keys()):
+            file_ids = file_days_dict[file_day]
             upload_file_ids = []
             for file_id in file_ids:
                 file_path = file_paths[file_id]
