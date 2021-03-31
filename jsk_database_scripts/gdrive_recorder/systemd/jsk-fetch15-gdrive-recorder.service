@@ -6,7 +6,7 @@ Wants=network-online.target
 [Service]
 User=applications
 Group=applications
-ExecStart=/bin/bash -c "source /home/applications/ros/melodic/devel/setup.bash && rossetip && rossetmaster fetch15 && rosrun jsk_tools roscore_regardless.py --respawn --timeout 3 --ping-trials 1 --sigint-timeout 5 --sigterm-timeout 5 rosrun gdrive_recorder gdrive_recorder.py _video_path:=/tmp _database:=fetch15 _timezone:=Asia/Tokyo _robot_type:=fetch"
+ExecStart=/bin/bash -c "source /home/applications/ros/melodic/devel/setup.bash && rossetip && rossetmaster fetch15 && rosrun jsk_tools roscore_regardless.py --respawn --timeout 3 --ping-trials 1 --sigint-timeout 5 --sigterm-timeout 5 rosrun gdrive_recorder gdrive_recorder.py _video_path:=/tmp _database:=fetch15 _timezone:=Asia/Tokyo _robot_type:=fetch _robot_name:=fetch15"
 
 [Install]
 WantedBy=multi-user.target
