@@ -26,10 +26,11 @@ class GdriveRecorder(object):
         self.upload_duration = rospy.get_param('~upload_duration', 60*20)
         timezone = rospy.get_param('~timezone', 'UTC')
         self.robot_type = rospy.get_param('~robot_type', 'pr2')
+        self.robot_name = rospy.get_param('~robot_name', self.robot_type)
         self.gdrive_server_name = rospy.get_param(
             '~gdrive_server_name', 'gdrive_record_server')
         self.upload_parents_path = rospy.get_param(
-            '~upload_parents_path', '{}_recorder'.format(self.robot_type))
+            '~upload_parents_path', '{}_recorder'.format(self.robot_name))
         self.sigint_timeout = rospy.get_param('~sigint_timeout', 3)
         self.sigterm_timeout = rospy.get_param('~sigterm_timeout', 3)
         self.store_url = rospy.get_param('~store_url', True)
@@ -85,7 +86,7 @@ class GdriveRecorder(object):
         file_titles = os.listdir(self.video_path)
         file_titles = [
             x for x in file_titles if x.endswith(
-                '_{}_record_video.avi'.format(self.robot_type))]
+                '_{}_record_video.avi'.format(self.robot_name))]
         if self.video_title in file_titles:
             file_titles.remove(self.video_title)
         if len(file_titles) == 0:
@@ -182,7 +183,7 @@ class GdriveRecorder(object):
         stamp = self.tz.localize(stamp).astimezone(self.localtz)
         stamp = stamp.strftime('%Y%m%d_%H%M%S%Z')
         self.video_title = '{}_{}_record_video.avi'.format(
-            stamp, self.robot_type)
+            stamp, self.robot_name)
         cmds = [
             'roslaunch',
             'gdrive_recorder',
