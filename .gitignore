@@ -103,7 +103,7 @@ celerybeat.pid
 
 # Environments
 .env
-!mongodb/docker/.env
+!jsk_database_scripts/mongodb/docker/.env
 .venv
 env/
 venv/
