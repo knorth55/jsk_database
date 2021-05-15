@@ -72,6 +72,11 @@ class GdriveRecorder(object):
         success = True
         message = ''
         fail_count = 0
+        if not result:
+            success = False
+            message = 'No file uploaded'
+            return TriggerResponse(success=success, message=message)
+
         for res in result:
             for suc in res.successes:
                 if not suc:
@@ -91,7 +96,7 @@ class GdriveRecorder(object):
             file_titles.remove(self.video_title)
         if len(file_titles) == 0:
             rospy.loginfo('No file found to upload')
-            return
+            return None
         file_paths = ['{}/{}'.format(self.video_path, x) for x in file_titles]
 
         file_days_dict = {}
