@@ -24,6 +24,8 @@ class GdriveRecorder(object):
         # default: 20 min
         self.record_duration = rospy.get_param('~record_duration', 60*20)
         self.upload_duration = rospy.get_param('~upload_duration', 60*20)
+        self.decompress_monitor_duration = rospy.get_param(
+            '~decompress_monitor_duration', 10)
         timezone = rospy.get_param('~timezone', 'UTC')
         self.robot_type = rospy.get_param('~robot_type', 'pr2')
         self.robot_name = rospy.get_param('~robot_name', self.robot_type)
@@ -42,27 +44,42 @@ class GdriveRecorder(object):
                 host=host, port=port, database=database)
             self.client.create_database(database)
 
+        self.process = None
+        self.video_title = None
+        self.tz = pytz.timezone('UTC')
+        self.localtz = pytz.timezone(timezone)
+        self._start_record()
+
+        self._start_decompress_process()
+        self.upload_service = rospy.Service(
+            '~upload', Trigger, self._upload_service_cb)
+
         self.record_timer = rospy.Timer(
             rospy.Duration(self.record_duration),
             self._record_timer_cb)
         self.upload_timer = rospy.Timer(
             rospy.Duration(self.upload_duration),
             self._upload_timer_cb)
-        self.upload_service = rospy.Service(
-            '~upload', Trigger, self._upload_service_cb)
+        self.decompress_monitor_timer = rospy.Timer(
+            rospy.Duration(self.decompress_monitor_duration),
+            self._decompress_monitor_timer_cb)
 
+    def _start_decompress_process(self):
         self.decompress_process = subprocess.Popen(
             args=['roslaunch', 'gdrive_recorder',
-                  '{}_decompress.launch'.format(self.robot_type)],
+                  '{}_decompress.launch'.format(self.robot_type),
+                  '--screen'],
             close_fds=self.is_posix,
             env=os.environ.copy(),
             preexec_fn=os.setpgrp()
         )
-        self.process = None
-        self.video_title = None
-        self.tz = pytz.timezone('UTC')
-        self.localtz = pytz.timezone(timezone)
-        self._start_record()
+
+    def _decompress_monitor_timer_cb(self, event):
+        poll = self.decompress_process.poll()
+        if poll is not None:
+            rospy.logerr('Decompress process has stopped.')
+            self._kill_process(self.decompress_process)
+            self._start_decompress_process()
 
     def _upload_timer_cb(self, event):
         self._upload()
@@ -269,6 +286,7 @@ class GdriveRecorder(object):
                 rospy.logerr(
                     "Failed to kill descendent processes: {}".format(e))
         return exit_code
+
 
 if __name__ == '__main__':
     rospy.init_node('gdrive_recorder')
