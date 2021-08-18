@@ -1,7 +1,7 @@
 - git:
     local-name: knorth55/jsk_database
     uri: https://github.com/knorth55/jsk_database.git
-    version: master
+    version: main
 - git:
     local-name: knorth55/influxdb_store
     uri: https://github.com/knorth55/influxdb_store.git
