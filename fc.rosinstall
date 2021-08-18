@@ -9,4 +9,4 @@
 - git:
     local-name: knorth55/audio_video_recorder
     uri: https://github.com/knorth55/audio_video_recorder.git
-    version: master
+    version: main
