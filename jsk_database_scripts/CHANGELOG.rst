@@ -2,8 +2,8 @@
 Changelog for package jsk_database_scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.1 (2021-08-18)
+------------------
 * fix readme format
 * fix readme format
 * add noqa
