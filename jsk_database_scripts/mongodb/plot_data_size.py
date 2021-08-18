@@ -7,7 +7,7 @@ import pandas as pd
 
 import matplotlib
 matplotlib.use('Agg')  # NOQA
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  # NOQA
 
 
 with open("data_size.json") as f:
