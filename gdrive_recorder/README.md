@@ -1,6 +1,6 @@
 # gdrive_recorder
 
-Long-term video logging with Google Drive 
+Long-term video logging with Google Drive
 
 ## Description
 
@@ -29,7 +29,7 @@ rossetmaster pr1040
 roslaunch gdrive_recorder pr1040_gdrive_recorder.launch
 ```
 
-#### Fetch15 
+#### Fetch15
 
 ```bash
 rossetip
@@ -37,7 +37,7 @@ rossetmaster fetch15
 roslaunch gdrive_recorder fetch15_gdrive_recorder.launch
 ```
 
-#### Fetch1075 
+#### Fetch1075
 
 ```bash
 rossetip
@@ -50,11 +50,11 @@ roslaunch gdrive_recorder fetch1075_gdrive_recorder.launch
 #### Systemd
 
 ```bash
-# start 
+# start
 rosrun gdrive_recorder start_all_services.bash
 # reload
 rosrun gdrive_recorder reload_all_services.bash
-# stop 
+# stop
 rosrun gdrive_recorder stop_all_services.bash
 ```
 
@@ -66,11 +66,11 @@ rosrun gdrive_recorder stop_all_services.bash
 
 - `~robot_type`: (`String`, default: `pr2`)
 
-  robot type 
+  robot type
 
 - `~robot_name`: (`String`, default: `pr2`)
 
-  robot name 
+  robot name
 
 - `~timezone`: (`String`, default: `UTC`)
 
@@ -114,8 +114,8 @@ rosrun gdrive_recorder stop_all_services.bash
 
 - `port`: (`Int`, default: `8086`)
 
-  InfluxDB port number 
+  InfluxDB port number
 
 - `database`: (`String`, default: `test`)
 
-  InfluxDB  database name 
+  InfluxDB  database name

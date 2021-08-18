@@ -14,31 +14,31 @@ Please see [./mongodb/docker](./mongodb/docker) for more information.
 
 ### Backup mongodb to QNAP
 
-```
+```bash
 cd ./mongodb
 sudo bash ./backup_to_qnap.sh
 ```
 
-## influxdb 
+## influxdb
 
-JSK influxdb database server config 
+JSK influxdb database server config
 
 ### Systemctl service installation
 
-```
+```bash
 sudo cp ./influxdb/systemd/* /etc/systemd/system
 sudo systemctl daemon-reload
 # enable your service
 sudo systemctl enable jsk-pr1040-influxdb.service
 ```
 
-## gdrive 
+## gdrive
 
-JSK gdrive server config 
+JSK gdrive server config
 
 ### Systemctl service installation
 
-```
+```bash
 sudo cp ./gdrive/systemd/* /etc/systemd/system
 sudo systemctl daemon-reload
 # enable your service

@@ -24,8 +24,8 @@ class GdriveRecorder(object):
         self.video_path = rospy.get_param('~video_path', '/tmp')
         self.video_topic_name = rospy.get_param('~video_topic_name', None)
         # default: 20 min
-        self.record_duration = rospy.get_param('~record_duration', 60*20)
-        self.upload_duration = rospy.get_param('~upload_duration', 60*20)
+        self.record_duration = rospy.get_param('~record_duration', 60 * 20)
+        self.upload_duration = rospy.get_param('~upload_duration', 60 * 20)
         self.decompress_monitor_duration = rospy.get_param(
             '~decompress_monitor_duration', 10)
         timezone = rospy.get_param('~timezone', 'UTC')

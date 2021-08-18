@@ -1,19 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Author: Furushchev <furushchev@jsk.imi.i.u-tokyo.ac.jp>
 
 from pathlib2 import Path
-import pymongo
 import re
 import subprocess as sp
+import sys
+from threading import Thread
 import time
 from tqdm import tqdm
-from threading import Thread
-import sys
+
 try:
-    from Queue import Queue, Empty
-except:
-    from queue import Queue, Empty
+    from Queue import Empty
+    from Queue import Queue
+except Exception:
+    from queue import Empty
+    from queue import Queue
 
 
 REGEX = re.compile(r"^([0-9]+/[0-9]+)$")
@@ -35,8 +36,8 @@ def run(cmd):
                     stdout=sp.PIPE, stderr=sp.PIPE,
                     bufsize=1, close_fds=POSIX)
     queue = Queue()
-    tout = read(proc.stdout, queue)
-    terr = read(proc.stderr, queue)
+    # tout = read(proc.stdout, queue)
+    # terr = read(proc.stderr, queue)
 
     with tqdm(total=100) as bar:
         bar.desc = cmd[0]
@@ -49,24 +50,30 @@ def run(cmd):
                 bar.update(perc - bar.pos)
             except Empty:
                 pass
-            except:
+            except Exception:
                 try:
                     bar.desc = progress[1]
-                except:
+                except Exception:
                     pass
             finally:
                 time.sleep(0.1)
 
-    print "'%s' exited with code %d" % (' '.join(cmd), proc.poll())
+    print("'%s' exited with code %d" % (' '.join(cmd), proc.poll()))
     if proc.poll() != 0:
         # proc.stderr.seek(0)
-        print proc.stderr.read()
+        print(proc.stderr.read())
     return proc.poll()
 
 
 def dump(addr, port, out, db=None, col=None):
     Path(out).mkdir(parents=True, exist_ok=True)
-    cmd = ['mongodump', '--verbose', '--out', out, "--host", addr, "--port", str(port)]
+    cmd = [
+        'mongodump',
+        '--verbose',
+        '--out', out,
+        "--host", addr,
+        "--port", str(port)
+    ]
     if db:
         cmd += ['--db', db]
     if col:
@@ -119,6 +126,6 @@ if __name__ == '__main__':
         try:
             shutil.rmtree(args.path)
         except Exception as e:
-            print "Failed to dump path %s: %s" % (args.path, str(e))
+            print("Failed to dump path %s: %s" % (args.path, str(e)))
 
     exit(0)
