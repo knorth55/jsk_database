@@ -1,12 +1,12 @@
 - git:
-  name: knorth55/jsk_database 
+  local-name: knorth55/jsk_database
   uri: https://github.com/knorth55/jsk_database.git
   version: master
 - git:
-  name: knorth55/influxdb_store 
+  local-name: knorth55/influxdb_store
   uri: https://github.com/knorth55/influxdb_store.git
   version: master
 - git:
-  name: knorth55/audio_video_recorder 
+  local-name: knorth55/audio_video_recorder
   uri: https://github.com/knorth55/audio_video_recorder.git
   version: master
