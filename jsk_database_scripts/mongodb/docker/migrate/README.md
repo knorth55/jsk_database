@@ -1,4 +1,4 @@
-migrate from MongoDB 2.6 to 3.0
+# migrate from MongoDB 2.6 to 3.0
 
 ## Changes
 
