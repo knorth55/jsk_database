@@ -13,6 +13,7 @@ import rospy
 
 from gdrive_ros.srv import MultipleUpload
 from gdrive_ros.srv import MultipleUploadRequest
+from sensor_msgs.msg import Image
 from std_srvs.srv import Trigger
 from std_srvs.srv import TriggerResponse
 
@@ -21,6 +22,7 @@ class GdriveRecorder(object):
     def __init__(self):
         self.is_posix = 'posix' in sys.builtin_module_names
         self.video_path = rospy.get_param('~video_path', '/tmp')
+        self.video_topic_name = rospy.get_param('~video_topic_name', None)
         # default: 20 min
         self.record_duration = rospy.get_param('~record_duration', 60*20)
         self.upload_duration = rospy.get_param('~upload_duration', 60*20)
@@ -46,6 +48,7 @@ class GdriveRecorder(object):
 
         self.process = None
         self.video_title = None
+        self.video_subscribed = False
         self.tz = pytz.timezone('UTC')
         self.localtz = pytz.timezone(timezone)
         self._start_record()
@@ -64,22 +67,40 @@ class GdriveRecorder(object):
             rospy.Duration(self.decompress_monitor_duration),
             self._decompress_monitor_timer_cb)
 
+        if self.video_topic_name:
+            self.video_sub = rospy.Subscriber(
+                self.video_topic_name, Image, self._video_cb)
+        else:
+            self.video_subscribed = True
+
+    def _video_cb(self, msg):
+        self.video_subscribed = True
+
     def _start_decompress_process(self):
+        cmds = [
+            'roslaunch', 'gdrive_recorder',
+            '{}_decompress.launch'.format(self.robot_type),
+        ]
+        if self.video_topic_name:
+            cmds.append('video_topic_name:={}'.format(self.video_topic_name))
+        cmds.append('--screen')
         self.decompress_process = subprocess.Popen(
-            args=['roslaunch', 'gdrive_recorder',
-                  '{}_decompress.launch'.format(self.robot_type),
-                  '--screen'],
+            args=cmds,
             close_fds=self.is_posix,
             env=os.environ.copy(),
             preexec_fn=os.setpgrp()
         )
+        if self.video_topic_name:
+            self.video_subscribed = False
 
     def _decompress_monitor_timer_cb(self, event):
         poll = self.decompress_process.poll()
-        if poll is not None:
+        if poll is not None or not self.video_subscribed:
             rospy.logerr('Decompress process has stopped.')
             self._kill_process(self.decompress_process)
             self._start_decompress_process()
+        if self.video_topic_name:
+            self.video_subscribed = False
 
     def _upload_timer_cb(self, event):
         self._upload()
