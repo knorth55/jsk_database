@@ -1,6 +1,7 @@
 # jsk_database
 
-[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/knorth55/jsk_database/CI/main)](https://github.com/knorth55/jsk_database/actions)
+[![main](https://github.com/knorth55/jsk_database/actions/workflows/main.yml/badge.svg)](https://github.com/knorth55/jsk_database/actions/workflows/main.yml)
+[![linter](https://github.com/knorth55/jsk_database/actions/workflows/linter.yaml/badge.svg)](https://github.com/knorth55/jsk_database/actions/workflows/linter.yaml)
 
 Long-term robot logging
 
