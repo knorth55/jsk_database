@@ -154,7 +154,10 @@ class GdriveRecorder(object):
                 file_size = os.path.getsize(file_path)
                 # check if file size is not empty
                 if file_size == 0:
-                    os.remove(file_path)
+                    try:
+                        os.remove(file_path)
+                    except OSError:
+                        pass
                     rospy.logwarn('Filesize is 0: {}'.format(file_path))
                 else:
                     upload_file_ids.append(file_id)
@@ -208,7 +211,10 @@ class GdriveRecorder(object):
 
             for success, file_path in zip(res.successes,  upload_file_paths):
                 if success:
-                    os.remove(file_path)
+                    try:
+                        os.remove(file_path)
+                    except OSError:
+                        pass
         rospy.loginfo('stop uploading')
         return result
 
