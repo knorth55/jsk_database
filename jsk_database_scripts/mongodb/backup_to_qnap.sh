@@ -2,6 +2,14 @@
 
 # lock by pid
 # PIDFILE=/var/run/mongodump_backup_to_qnap.pid
+#
+if mount | awk '{if ($3 == "/mnt/qnap") {exit 0}} ENDFILE{exit -1}'; then
+    echo "/mnt/qnap is mounted"
+else
+    echo "/mnt/qnap is not mounted"
+    exit 1
+fi
+
 PIDFILE=/var/run/rsync_backup_to_qnap.pid
 if [ -f $PIDFILE ]; then
     PID=$(cat $PIDFILE)
