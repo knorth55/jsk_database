@@ -28,7 +28,7 @@ fi
 
 date
 echo "backup starts."
-exec rsync --inplace -auvhP /mnt/hdd2/data/influxdb /mnt/hdd3/data/influxdb
+exec rsync --inplace -auvhP /mnt/hdd2/data/influxdb /mnt/hdd3/data/current_influxdb_backup
 date
 echo "backup ends."
 rm -f $PIDFILE
