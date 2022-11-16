@@ -4,6 +4,7 @@ from datetime import datetime
 import influxdb
 import os
 import pytz
+import requests
 import signal
 import subprocess
 import sys
@@ -42,9 +43,17 @@ class GdriveRecorder(object):
             host = rospy.get_param('~host', 'localhost')
             port = rospy.get_param('~port', 8086)
             database = rospy.get_param('~database', 'test')
-            self.client = influxdb.InfluxDBClient(
-                host=host, port=port, database=database)
-            self.client.create_database(database)
+            is_influxdb_up = False
+            while is_influxdb_up is False:
+                try:
+                    self.client = influxdb.InfluxDBClient(
+                        host=host, port=port, database=database)
+                    self.client.create_database(database)
+                    is_influxdb_up = True
+                except requests.exceptions.ConnectionError as e:
+                    rospy.logerr(e)
+                    rospy.logerr("Waiting 3 minutes for influxdb.")
+                    time.sleep(60 * 3)
 
         self.process = None
         self.video_title = None
