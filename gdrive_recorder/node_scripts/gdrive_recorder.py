@@ -243,7 +243,8 @@ class GdriveRecorder(object):
             rospy.logerr('{} is not mounted.'.format(self.upload_server_dir)
             return success
 
-        server_file_dir = '{}/{}'.format(self.upload_server_dir, file_day)
+        server_file_dir = '{}/auto_video_recorder/{}/{}'.format(
+            self.upload_server_dir, self.upload_parents_path, file_day)
         if not os.path.exists(server_file_dir):
             os.path.makedirs(server_file_dir)
 
