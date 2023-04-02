@@ -2,8 +2,8 @@
 Changelog for package gdrive_recorder
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2023-04-02)
+------------------
 * fix typo
 * fix typo
 * fix typo
