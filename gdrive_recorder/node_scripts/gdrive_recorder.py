@@ -129,13 +129,13 @@ class GdriveRecorder(object):
         self._upload_gdrive()
 
     def _upload_gdriver_service_cb(self, req):
-        self._upload_service_cb(self._upload_gdrive)
+        return self._upload_service_cb(self._upload_gdrive)
 
     def _upload_server_timer_cb(self, event):
         self._upload_server()
 
     def _upload_server_service_cb(self, req):
-        self._upload_service_cb(self._upload_server)
+        return self._upload_service_cb(self._upload_server)
 
     def _upload_service_cb(self, upload_func):
         result = upload_func()
@@ -147,8 +147,8 @@ class GdriveRecorder(object):
             message = 'No file uploaded'
             return TriggerResponse(success=success, message=message)
 
-        for success in result:
-            for suc in success:
+        for sucs in result:
+            for suc in sucs:
                 if not suc:
                     success = False
                     fail_count = fail_count + 1
@@ -174,6 +174,7 @@ class GdriveRecorder(object):
         file_titles = [
             x for x in file_titles if x.endswith(
                 '_{}_record_video.avi'.format(self.robot_name))]
+        return file_titles
 
     def _create_file_paths(self, file_titles):
         if self.video_title in file_titles:
@@ -212,10 +213,10 @@ class GdriveRecorder(object):
         # influxdb
         if self.store_url:
             query = []
-            for success, file_url, file_path, file_title, in zip(
+            for suc, file_url, file_path, file_title, in zip(
                     res.successes, res.file_urls,
                     upload_file_paths, upload_file_titles):
-                if success:
+                if suc:
                     rospy.loginfo('Upload succeeded: {}'.format(file_path))
                     stamp = '_'.join(file_title.split('_')[:2])
                     stamp = self.localtz.localize(
@@ -246,7 +247,7 @@ class GdriveRecorder(object):
         server_file_dir = '{}/auto_video_recorder/{}/{}'.format(
             self.upload_server_dir, self.upload_parents_path, file_day)
         if not os.path.exists(server_file_dir):
-            os.path.makedirs(server_file_dir)
+            os.makedirs(server_file_dir)
 
         for (upload_file_path, upload_file_title) in zip(
                 upload_file_paths, upload_file_titles):
