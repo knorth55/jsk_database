@@ -26,7 +26,7 @@ class GdriveRecorder(object):
         self.is_posix = 'posix' in sys.builtin_module_names
         self.video_path = rospy.get_param('~video_path', '/tmp')
         self.video_topic_name = rospy.get_param('~video_topic_name', None)
-        # upload dest: gdrive or quaser
+        # upload dest: gdrive or quasar
         self.upload_dest = rospy.get_param('~upload_dest', 'gdrive')
         # default: 20 min
         self.record_duration = rospy.get_param('~record_duration', 60 * 20)
