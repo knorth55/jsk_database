@@ -2,6 +2,29 @@
 Changelog for package gdrive_recorder
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix typo
+* fix typo
+* fix typo
+* fix typo
+* update systemd
+* update path
+* update systemd service
+* support server upload
+* add upload_dest
+* update systemd scripts
+* set enable_upload false
+* wait until influxdb is on
+* add pr1012 scripts
+* add jsk pr1012 service
+* catch OSerror
+* add stop bash script
+* update systemd
+* restart/reload/start gdrive systemd
+* set -x in bash scripts
+* Contributors: Shingo Kitagawa
+
 0.0.1 (2021-08-18)
 ------------------
 * fix for linter

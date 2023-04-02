@@ -2,6 +2,22 @@
 Changelog for package jsk_database_scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* remove gdrive
+* link
+* update influx systemd
+* use symlinks
+* fix typo in backup_to_qnap.sh
+* add backup_hdd3_to_qnap.sh
+* fix directory name
+* check qnap is mounted or not
+* fix typo
+* check if qnap is mounted or not
+* add backup_to_hdd3.sh
+* add influxdb scripts
+* Contributors: Shingo Kitagawa
+
 0.0.1 (2021-08-18)
 ------------------
 * fix readme format
