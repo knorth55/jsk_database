@@ -6,7 +6,7 @@ import os
 import os.path
 import pytz
 import requests
-import shutils
+import shutil
 import signal
 import subprocess
 import sys
@@ -240,7 +240,7 @@ class GdriveRecorder(object):
             self, file_day, upload_file_paths, upload_file_titles):
         success = []
         if not os.path.ismount(self.upload_server_dir):
-            rospy.logerr('{} is not mounted.'.format(self.upload_server_dir)
+            rospy.logerr('{} is not mounted.'.format(self.upload_server_dir))
             return success
 
         server_file_dir = '{}/auto_video_recorder/{}/{}'.format(
@@ -253,7 +253,7 @@ class GdriveRecorder(object):
             server_file_path = '{}/{}'.format(server_file_dir, server_file_path)
             try:
                 rospy.loginfo('copy: {} -> {}'.format(upload_file_path, server_file_path))
-                shutils.copy(upload_file_path, server_file_path)
+                shutil.copy(upload_file_path, server_file_path)
                 success.append(True)
             except Exception as e:
                 rospy.logerr(e)
