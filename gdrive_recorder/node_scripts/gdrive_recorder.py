@@ -248,11 +248,13 @@ class GdriveRecorder(object):
         if not os.path.exists(server_file_dir):
             os.path.makedirs(server_file_dir)
 
-        for (upload_file_path, upload_tile_title) in zip(
+        for (upload_file_path, upload_file_title) in zip(
                 upload_file_paths, upload_file_titles):
-            server_file_path = '{}/{}'.format(server_file_dir, server_file_path)
+            server_file_path = '{}/{}'.format(
+                server_file_dir, upload_file_title)
             try:
-                rospy.loginfo('copy: {} -> {}'.format(upload_file_path, server_file_path))
+                rospy.loginfo('copy: {} -> {}'.format(
+                    upload_file_path, server_file_path))
                 shutil.copy(upload_file_path, server_file_path)
                 success.append(True)
             except Exception as e:
@@ -283,7 +285,7 @@ class GdriveRecorder(object):
             upload_file_titles = [
                 x for i, x in enumerate(file_titles) if i in upload_file_ids]
             success = _upload_step_func(
-                upload_parents_path, upload_file_paths, upload_file_titles)
+                file_day, upload_file_paths, upload_file_titles)
             result.append(success)
 
             for suc, file_path in zip(success,  upload_file_paths):
