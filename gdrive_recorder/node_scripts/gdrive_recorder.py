@@ -24,6 +24,7 @@ class GdriveRecorder(object):
         self.is_posix = 'posix' in sys.builtin_module_names
         self.video_path = rospy.get_param('~video_path', '/tmp')
         self.video_topic_name = rospy.get_param('~video_topic_name', None)
+        self.enable_upload = rospy.get_param('~enable_upload', True)
         # default: 20 min
         self.record_duration = rospy.get_param('~record_duration', 60 * 20)
         self.upload_duration = rospy.get_param('~upload_duration', 60 * 20)
@@ -63,18 +64,20 @@ class GdriveRecorder(object):
         self._start_record()
 
         self._start_decompress_process()
-        self.upload_service = rospy.Service(
-            '~upload', Trigger, self._upload_service_cb)
 
         self.record_timer = rospy.Timer(
             rospy.Duration(self.record_duration),
             self._record_timer_cb)
-        self.upload_timer = rospy.Timer(
-            rospy.Duration(self.upload_duration),
-            self._upload_timer_cb)
         self.decompress_monitor_timer = rospy.Timer(
             rospy.Duration(self.decompress_monitor_duration),
             self._decompress_monitor_timer_cb)
+
+        if self.enable_upload:
+            self.upload_service = rospy.Service(
+                '~upload', Trigger, self._upload_service_cb)
+            self.upload_timer = rospy.Timer(
+                rospy.Duration(self.upload_duration),
+                self._upload_timer_cb)
 
         if self.video_topic_name:
             self.video_sub = rospy.Subscriber(
